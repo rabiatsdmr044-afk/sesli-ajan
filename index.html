@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesli Asistan | ElevenLabs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .avatar.active {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        .wave-container {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 60px;
+            display: none;
+        }
+
+        .wave-container.active {
+            display: block;
+        }
+
+        .wave {
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to top, #667eea, #764ba2);
+            margin: 0 3px;
+            display: inline-block;
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave:nth-child(2) { animation-delay: 0.1s; }
+        .wave:nth-child(3) { animation-delay: 0.2s; }
+        .wave:nth-child(4) { animation-delay: 0.3s; }
+        .wave:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: 100%; }
+        }
+
+        .status {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            min-height: 28px;
+        }
+
+        .status-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            min-height: 42px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 80px;
+            height: 80px;
+            font-size: 32px;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .transcript {
+            background: #f8f8f8;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 100px;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .transcript-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .transcript-item.user {
+            background: #e8eaf6;
+        }
+
+        .transcript-item.assistant {
+            background: #f3e5f5;
+        }
+
+        .transcript-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .transcript-item.assistant .transcript-label {
+            color: #764ba2;
+        }
+
+        .transcript-text {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .info {
+            font-size: 12px;
+            color: #999;
+            margin-top: 20px;
+        }
+
+        .info a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🎙️ ElevenLabs</div>
+        <div class="subtitle">Yapay Zeka Sesli Asistan</div>
+
+        <div class="avatar-container">
+            <div class="avatar" id="avatar">🤖</div>
+            <div class="wave-container" id="waveContainer">
+                <span class="wave"></span>
+                <span class="wave"></span>
+                <span class="wave"></span>
+                <span class="wave"></span>
+                <span class="wave"></span>
+            </div>
+        </div>
+
+        <div class="status" id="status">Başlamaya Hazır</div>
+        <div class="status-description" id="statusDescription">Konuşmaya başlamak için mikrofon butonuna tıklayın</div>
+
+        <div class="controls">
+            <button class="btn btn-secondary" id="muteBtn" title="Sessiz Mod" disabled>
+                🔇
+            </button>
+            <button class="btn btn-primary" id="recordBtn" title="Konuşmaya Başla">
+                🎤
+            </button>
+            <button class="btn btn-secondary" id="stopBtn" title="Durdur" disabled>
+                ⏹️
+            </button>
+        </div>
+
+        <div class="transcript" id="transcript">
+            <div style="color: #999; text-align: center; padding: 20px;">
+                Henüz konuşma yok. Mikrofona tıklayarak başlayın!
+            </div>
+        </div>
+
+        <div class="info">
+            Bu bir demo arayüzüdür. Gerçek sesli asistan için <a href="https://elevenlabs.io" target="_blank">ElevenLabs</a> platformunu ziyaret edin.
+        </div>
+    </div>
+
+    <script>
+        const avatar = document.getElementById('avatar');
+        const waveContainer = document.getElementById('waveContainer');
+        const status = document.getElementById('status');
+        const statusDescription = document.getElementById('statusDescription');
+        const recordBtn = document.getElementById('recordBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const transcript = document.getElementById('transcript');
+
+        let isRecording = false;
+        let isMuted = false;
+        let conversationHistory = [];
+
+        const demoResponses = [
+            "Merhaba! Size nasıl yardımcı olabilirim?",
+            "Tabii, bu konuda size yardımcı olabilirim.",
+            "Anlıyorum. Başka bir şey sormak ister misiniz?",
+            "İyi soru! Bu konuda şunu söyleyebilirim...",
+            "Elbette, daha fazla bilgi verebilirim."
+        ];
+
+        recordBtn.addEventListener('click', toggleRecording);
+        muteBtn.addEventListener('click', toggleMute);
+        stopBtn.addEventListener('click', stopConversation);
+
+        function toggleRecording() {
+            isRecording = !isRecording;
+
+            if (isRecording) {
+                startRecording();
+            } else {
+                pauseRecording();
+            }
+        }
+
+        function startRecording() {
+            avatar.classList.add('active');
+            waveContainer.classList.add('active');
+            status.textContent = 'Dinliyor...';
+            statusDescription.textContent = 'Konuşmaya başlayabilirsiniz';
+            recordBtn.innerHTML = '⏸️';
+            recordBtn.title = 'Duraklat';
+            muteBtn.disabled = false;
+            stopBtn.disabled = false;
+
+            // Demo amaçlı simüle edilmiş konuşma
+            setTimeout(() => {
+                if (isRecording) {
+                    simulateUserSpeech();
+                }
+            }, 2000);
+        }
+
+        function pauseRecording() {
+            avatar.classList.remove('active');
+            waveContainer.classList.remove('active');
+            status.textContent = 'Duraklatıldı';
+            statusDescription.textContent = 'Devam etmek için tekrar tıklayın';
+            recordBtn.innerHTML = '🎤';
+            recordBtn.title = 'Devam Et';
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted ? '🔊' : '🔇';
+            status.textContent = isMuted ? 'Sessize Alındı' : 'Dinliyor...';
+        }
+
+        function stopConversation() {
+            isRecording = false;
+            avatar.classList.remove('active');
+            waveContainer.classList.remove('active');
+            status.textContent = 'Durduruldu';
+            statusDescription.textContent = 'Yeniden başlamak için mikrofon butonuna tıklayın';
+            recordBtn.innerHTML = '🎤';
+            recordBtn.title = 'Konuşmaya Başla';
+            muteBtn.disabled = true;
+            stopBtn.disabled = true;
+        }
+
+        function simulateUserSpeech() {
+            const userTexts = [
+                "Merhaba, nasılsın?",
+                "Bugün hava nasıl?",
+                "Bana bir şaka anlatır mısın?",
+                "Yapay zeka hakkında bilgi verir misin?",
+                "Teşekkür ederim!"
+            ];
+
+            const randomUserText = userTexts[Math.floor(Math.random() * userTexts.length)];
+            
+            addToTranscript('user', randomUserText);
+
+            status.textContent = 'İşleniyor...';
+            statusDescription.textContent = 'Cevabınız hazırlanıyor';
+
+            setTimeout(() => {
+                simulateAssistantResponse();
+            }, 1500);
+        }
+
+        function simulateAssistantResponse() {
+            const randomResponse = demoResponses[Math.floor(Math.random() * demoResponses.length)];
+            
+            status.textContent = 'Konuşuyor...';
+            statusDescription.textContent = 'Asistan cevap veriyor';
+            avatar.classList.add('active');
+
+            setTimeout(() => {
+                addToTranscript('assistant', randomResponse);
+                
+                if (isRecording) {
+                    status.textContent = 'Dinliyor...';
+                    statusDescription.textContent = 'Konuşmaya devam edebilirsiniz';
+                    
+                    setTimeout(() => {
+                        if (isRecording) {
+                            simulateUserSpeech();
+                        }
+                    }, 2000);
+                }
+            }, 2000);
+        }
+
+        function addToTranscript(role, text) {
+            conversationHistory.push({ role, text });
+
+            const item = document.createElement('div');
+            item.className = `transcript-item ${role}`;
+            
+            const label = document.createElement('div');
+            label.className = 'transcript-label';
+            label.textContent = role === 'user' ? 'Siz:' : 'Asistan:';
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'transcript-text';
+            textDiv.textContent = text;
+            
+            item.appendChild(label);
+            item.appendChild(textDiv);
+
+            if (conversationHistory.length === 1) {
+                transcript.innerHTML = '';
+            }
+
+            transcript.appendChild(item);
+            transcript.scrollTop = transcript.scrollHeight;
+        }
+    </script>
+</body>
+</html>
