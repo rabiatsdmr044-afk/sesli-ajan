@@ -16,98 +16,61 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             padding: 20px;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            max-width: 1200px;
+            width: 100%;
+            background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 1000px;
-            width: 100%;
-            backdrop-filter: blur(10px);
+            overflow: hidden;
+            margin-top: 20px;
         }
 
-        h1 {
-            color: #667eea;
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .links-section {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 30px;
             border-left: 5px solid #667eea;
         }
 
-        .links-section h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .link-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .link-list li {
-            padding: 15px;
-            margin: 12px 0;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .link-list li:hover {
-            transform: translateX(8px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .link-icon {
-            font-size: 1.5em;
-            min-width: 30px;
-        }
-
-        .link-content {
-            flex: 1;
-        }
-
-        .link-title {
-            font-weight: bold;
+        .info-section h2 {
             color: #667eea;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
         }
 
-        .link-url {
-            color: #666;
-            font-size: 0.85em;
-            word-break: break-all;
-        }
-
-        .link-url a {
-            color: #764ba2;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .link-url a:hover {
-            color: #667eea;
-            text-decoration: underline;
+        .info-section p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.1em;
         }
 
         .widget-container {
@@ -115,171 +78,145 @@
             border-radius: 15px;
             padding: 30px;
             margin: 30px 0;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
             min-height: 400px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
-        .info-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 10px;
-            border-left: 5px solid #667eea;
-        }
-
-        .info-section h2 {
-            color: #333;
-            margin-bottom: 15px;
+        .widget-container h3 {
+            color: #667eea;
+            margin-bottom: 20px;
             font-size: 1.5em;
         }
 
-        .info-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .info-list li {
-            padding: 12px;
-            margin: 8px 0;
+        .links-section {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .info-list li:hover {
-            transform: translateX(5px);
-        }
-
-        .info-list li::before {
-            content: "🎙️";
-            margin-right: 10px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            border-radius: 15px;
+            padding: 25px;
             margin-top: 30px;
+            border: 2px solid #e0e0e0;
         }
 
-        .feature-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .feature-title {
+        .links-section h3 {
             color: #667eea;
-            font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
         }
 
-        .feature-desc {
+        .link-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .link-item a {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .link-item a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .link-item p {
             color: #666;
-            font-size: 0.9em;
+            margin-top: 8px;
+            font-size: 0.95em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 20px;
         }
 
         @media (max-width: 768px) {
-            .container {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
                 padding: 20px;
             }
 
-            h1 {
-                font-size: 2em;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
+            .widget-container {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎤 Sesli AI Asistanı</h1>
-        
-        <div class="links-section">
-            <h2>🔗 ElevenLabs Bağlantıları</h2>
-            <ul class="link-list">
-                <li>
-                    <span class="link-icon">🌐</span>
-                    <div class="link-content">
-                        <div class="link-title">ElevenLabs Talk-To Arayüzü</div>
-                        <div class="link-url">
-                            <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_6001kdra150cee1stzvw0rx105at&branch_id=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc" target="_blank">
-                                https://elevenlabs.io/app/talk-to?agent_id=agent_6001kdra150cee1stzvw0rx105at&branch_id=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <span class="link-icon">🤖</span>
-                    <div class="link-content">
-                        <div class="link-title">Agent ID</div>
-                        <div class="link-url">agent_6001kdra150cee1stzvw0rx105at</div>
-                    </div>
-                </li>
-                <li>
-                    <span class="link-icon">🌿</span>
-                    <div class="link-content">
-                        <div class="link-title">Branch ID</div>
-                        <div class="link-url">agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc</div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <header>
+            <h1>🎙️ ElevenLabs Sesli AI Asistanı</h1>
+            <p>Yapay zeka destekli sesli konuşma deneyimi</p>
+        </header>
 
-        <div class="widget-container">
-            <elevenlabs-convai agent-id="agent_6001kdra150cee1stzvw0rx105at"></elevenlabs-convai>
-        </div>
-
-        <div class="info-section">
-            <h2>Nasıl Kullanılır?</h2>
-            <ul class="info-list">
-                <li>Mikrofon simgesine tıklayarak konuşmaya başlayın</li>
-                <li>AI asistanı sizi dinleyecek ve sesli yanıt verecektir</li>
-                <li>Sorularınızı doğal bir şekilde sorun</li>
-                <li>Konuşmayı durdurmak için tekrar tıklayın</li>
-            </ul>
-        </div>
-
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🗣️</div>
-                <div class="feature-title">Doğal Konuşma</div>
-                <div class="feature-desc">Gerçek bir insanla konuşuyormuş gibi etkileşim kurun</div>
+        <div class="content">
+            <div class="info-section">
+                <h2>Hoş Geldiniz!</h2>
+                <p>
+                    Bu sayfada ElevenLabs'in gelişmiş sesli AI asistanı ile etkileşime geçebilirsiniz. 
+                    Aşağıdaki widget üzerinden doğrudan sesli konuşma yapabilir, sorularınızı sorabilir 
+                    ve yapay zeka ile doğal bir sohbet deneyimi yaşayabilirsiniz.
+                </p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-title">Hızlı Yanıt</div>
-                <div class="feature-desc">Anında ve akıcı sesli yanıtlar alın</div>
+
+            <div class="widget-container">
+                <h3>Sesli Asistan Widget</h3>
+                <p style="color: #666; margin-bottom: 20px;">Mikrofon ikonuna tıklayarak konuşmaya başlayın</p>
+                
+                <!-- ElevenLabs ConvAI Widget -->
+                <elevenlabs-convai agent-id="agent_6001kdra150cee1stzvw0rx105at"></elevenlabs-convai>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <div class="feature-title">Akıllı Anlama</div>
-                <div class="feature-desc">Gelişmiş AI ile sorularınızı anlayın</div>
+
+            <div class="links-section">
+                <h3>📌 Faydalı Bağlantılar</h3>
+                
+                <div class="link-item">
+                    <strong>🔗 Ana Konuşma Sayfası:</strong><br>
+                    <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_6001kdra150cee1stzvw0rx105at&branch_id=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc" target="_blank">
+                        https://elevenlabs.io/app/talk-to?agent_id=agent_6001kdra150cee1stzvw0rx105at&branch_id=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc
+                    </a>
+                    <p>Doğrudan ElevenLabs platformunda konuşma başlatmak için bu bağlantıyı kullanın.</p>
+                </div>
+
+                <div class="link-item">
+                    <strong>🔗 Agent Yönetim Sayfası:</strong><br>
+                    <a href="https://elevenlabs.io/app/agents/agents/agent_6001kdra150cee1stzvw0rx105at?branchId=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc&tab=widget" target="_blank">
+                        https://elevenlabs.io/app/agents/agents/agent_6001kdra150cee1stzvw0rx105at?branchId=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc&tab=widget
+                    </a>
+                    <p>Agent ayarlarını görüntülemek ve widget kodunu almak için bu sayfayı ziyaret edin.</p>
+                </div>
+            </div>
+
+            <div class="info-section" style="margin-top: 30px;">
+                <h2>ℹ️ Nasıl Kullanılır?</h2>
+                <p>
+                    <strong>1.</strong> Yukarıdaki widget alanında mikrofon simgesine tıklayın<br>
+                    <strong>2.</strong> Tarayıcınız mikrofon izni isteyecektir, izin verin<br>
+                    <strong>3.</strong> Konuşmaya başlayın, AI asistanı sizi dinleyecek ve sesli yanıt verecektir<br>
+                    <strong>4.</strong> İstediğiniz zaman konuşmayı sonlandırabilirsiniz
+                </p>
             </div>
         </div>
     </div>
 
+    <footer>
+        <p>Powered by ElevenLabs AI Technology</p>
+    </footer>
+
+    <!-- ElevenLabs ConvAI Widget Script -->
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
