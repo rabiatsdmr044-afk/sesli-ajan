@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sesli Asistan - ElevenLabs</title>
-
+    <title>Yapay Zeka Sesli Asistan</title>
     <style>
         * {
             margin: 0;
@@ -23,28 +22,23 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
+            background: white;
+            border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
             text-align: center;
         }
 
         h1 {
-            margin-bottom: 5px;
+            color: #333;
+            margin-bottom: 15px;
             font-size: 2.5em;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .name {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #764ba2;
-            margin-bottom: 10px;
+            background-clip: text;
         }
 
         .subtitle {
@@ -53,39 +47,79 @@
             font-size: 1.1em;
         }
 
-        .widget-container {
+        .assistant-wrapper {
             margin: 30px 0;
-            padding: 20px;
-            background: #f5f7fa;
-            border-radius: 16px;
-            min-height: 260px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            min-height: 400px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .info-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .assistant-wrapper {
+                min-height: 300px;
+            }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <h1>Sesli Asistan</h1>
-        <div class="name">Rabia</div>
-        <p class="subtitle">Atatürk Üniversitesi Yönergeleri için Sesli Asistan</p>
-
-        <!-- ✅ SESLİ AJAN KODU (KOPYALANACAK KISIM BAŞLANGIÇ) -->
-        <div class="widget-container">
-            <elevenlabs-convai
-                agent-id="agent_4701kcnp4gzjehdbz5w1yb7pdzy6">
-            </elevenlabs-convai>
-
-            <script
-                src="https://elevenlabs.io/app/talk-to?agent_id=agent_4701kcnp4gzjehdbz5w1yb7pdzy6&branch_id=agtbrch_1801kcnp4k23frrswtnjy3aw79m7"
-                async
-                type="text/javascript">
-            </script>
+        <div class="icon">🎙️</div>
+        <h1>Yapay Zeka Sesli Asistan</h1>
+        <p class="subtitle">Sesli olarak konuşmaya başlamak için aşağıdaki asistanı kullanın</p>
+        
+        <div class="assistant-wrapper">
+            <elevenlabs-convai agent-id="agent_4701kcnp4gzjehdbz5w1yb7pdzy6"></elevenlabs-convai>
         </div>
-        <!-- ✅ SESLİ AJAN KODU (BİTİŞ) -->
 
+        <div class="info-box">
+            <h3>💡 Nasıl Kullanılır?</h3>
+            <p>
+                • Mikrofon butonuna tıklayın<br>
+                • Tarayıcınızın mikrofon izni istemesine onay verin<br>
+                • Asistanla sesli olarak konuşmaya başlayın<br>
+                • Yapay zeka size gerçek zamanlı olarak yanıt verecektir
+            </p>
+        </div>
     </div>
+
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
