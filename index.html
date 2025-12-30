@@ -26,7 +26,7 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 40px;
-            max-width: 800px;
+            max-width: 1000px;
             width: 100%;
             backdrop-filter: blur(10px);
         }
@@ -37,6 +37,77 @@
             margin-bottom: 30px;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .links-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .links-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .link-list li {
+            padding: 15px;
+            margin: 12px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .link-list li:hover {
+            transform: translateX(8px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-icon {
+            font-size: 1.5em;
+            min-width: 30px;
+        }
+
+        .link-content {
+            flex: 1;
+        }
+
+        .link-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .link-url {
+            color: #666;
+            font-size: 0.85em;
+            word-break: break-all;
+        }
+
+        .link-url a {
+            color: #764ba2;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .link-url a:hover {
+            color: #667eea;
+            text-decoration: underline;
         }
 
         .widget-container {
@@ -145,6 +216,37 @@
     <div class="container">
         <h1>🎤 Sesli AI Asistanı</h1>
         
+        <div class="links-section">
+            <h2>🔗 ElevenLabs Bağlantıları</h2>
+            <ul class="link-list">
+                <li>
+                    <span class="link-icon">🌐</span>
+                    <div class="link-content">
+                        <div class="link-title">ElevenLabs Talk-To Arayüzü</div>
+                        <div class="link-url">
+                            <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_6001kdra150cee1stzvw0rx105at&branch_id=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc" target="_blank">
+                                https://elevenlabs.io/app/talk-to?agent_id=agent_6001kdra150cee1stzvw0rx105at&branch_id=agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span class="link-icon">🤖</span>
+                    <div class="link-content">
+                        <div class="link-title">Agent ID</div>
+                        <div class="link-url">agent_6001kdra150cee1stzvw0rx105at</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="link-icon">🌿</span>
+                    <div class="link-content">
+                        <div class="link-title">Branch ID</div>
+                        <div class="link-url">agtbrch_0901kdra15pmeqhsa2a0z3ntqvrc</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
         <div class="widget-container">
             <elevenlabs-convai agent-id="agent_6001kdra150cee1stzvw0rx105at"></elevenlabs-convai>
         </div>
