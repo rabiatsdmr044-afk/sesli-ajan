@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElevenLabs Sesli Asistan</title>
+    <title>ElevenLabs Sesli AI Asistanları</title>
     <style>
         * {
             margin: 0;
@@ -12,168 +12,137 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveBackground 20s linear infinite;
-        }
-
-        @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            color: #333;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-            padding: 50px;
-            max-width: 900px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 0.8s ease-out;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header {
+        header {
             text-align: center;
+            color: white;
+            padding: 40px 20px;
             margin-bottom: 40px;
         }
 
         h1 {
-            color: #1a1a1a;
             font-size: 2.5em;
             margin-bottom: 10px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .subtitle {
-            color: #666;
             font-size: 1.2em;
-            font-weight: 400;
-        }
-
-        .assistant-container {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 2px solid #f0f0f0;
-            min-height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        elevenlabs-convai {
-            display: block;
-            width: 100%;
-            height: 100%;
-            min-height: 450px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-        }
-
-        .feature-icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .feature-title {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .feature-desc {
-            font-size: 0.9em;
             opacity: 0.9;
         }
 
-        .info-banner {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-            border-left: 5px solid #667eea;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
-        .info-banner p {
-            color: #1565c0;
-            line-height: 1.8;
-            font-size: 1em;
+        .agent-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .agent-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .agent-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .agent-title {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .agent-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .agent-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .agent-link:hover {
+            opacity: 0.9;
+        }
+
+        .widget-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .widget-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .widget-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            opacity: 0.8;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-            }
-
             h1 {
                 font-size: 2em;
             }
-
-            .subtitle {
-                font-size: 1em;
-            }
-
-            .assistant-container {
-                padding: 20px;
-                min-height: 400px;
-            }
-
-            .features {
+            
+            .agents-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -181,38 +150,65 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🎙️ AI Sesli Asistan</h1>
-            <p class="subtitle">ElevenLabs ile Güçlendirilmiş Yapay Zeka</p>
-        </div>
-        
-        <div class="assistant-container">
-            <elevenlabs-convai agent-id="agent_6001kdra150cee1stzvw0rx105at"></elevenlabs-convai>
+        <header>
+            <h1>🎙️ ElevenLabs Sesli AI Asistanları</h1>
+            <p class="subtitle">Yapay zeka destekli sesli asistanlarla etkileşime geçin</p>
+        </header>
+
+        <div class="agents-grid">
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon">🤖</div>
+                    <h3 class="agent-title">AI Asistan #1</h3>
+                </div>
+                <p class="agent-description">
+                    Gelişmiş konuşma yetenekleriyle donatılmış yapay zeka asistanı. Sorularınıza yanıt verir, size yardımcı olur ve doğal bir sohbet deneyimi sunar.
+                </p>
+                <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_3301kdr8xbqae5j953v2fnssb4rd&branch_id=agtbrch_6301kdr8xcfsf92t09myj7mcf414" 
+                   target="_blank" 
+                   class="agent-link">
+                    🎯 Asistanla Konuş
+                </a>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon">💬</div>
+                    <h3 class="agent-title">AI Asistan #2</h3>
+                </div>
+                <p class="agent-description">
+                    Web sitenize entegre edilebilen sesli AI asistanı. Kullanıcılarınıza gerçek zamanlı destek sağlar ve etkileşimi artırır.
+                </p>
+                <div style="margin-top: 20px;">
+                    <elevenlabs-convai agent-id="agent_6001kdra150cee1stzvw0rx105at"></elevenlabs-convai>
+                </div>
+            </div>
         </div>
 
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🎤</div>
-                <div class="feature-title">Doğal Konuşma</div>
-                <div class="feature-desc">Gerçek bir insan gibi akıcı konuşma deneyimi</div>
+        <div class="widget-section">
+            <h2>📋 Nasıl Kullanılır?</h2>
+            <div class="widget-info">
+                <p><strong>1. Link ile Erişim:</strong> "Asistanla Konuş" butonuna tıklayarak doğrudan ElevenLabs platformunda asistanla konuşabilirsiniz.</p>
+                <br>
+                <p><strong>2. Gömülü Widget:</strong> Sağ alttaki widget ile bu sayfadan ayrılmadan asistanla etkileşime geçebilirsiniz.</p>
+                <br>
+                <p><strong>3. Kendi Sitenize Ekleyin:</strong> Aşağıdaki kodu kopyalayarak kendi web sitenize ekleyebilirsiniz.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-title">Hızlı Yanıt</div>
-                <div class="feature-desc">Anında işlem ve hızlı geri dönüş</div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <div class="feature-title">7/24 Erişim</div>
-                <div class="feature-desc">Her zaman, her yerden ulaşılabilir</div>
+            
+            <div style="background: #282c34; color: #abb2bf; padding: 20px; border-radius: 8px; overflow-x: auto;">
+                <code style="font-family: 'Courier New', monospace; font-size: 14px;">
+                    &lt;elevenlabs-convai agent-id="agent_6001kdra150cee1stzvw0rx105at"&gt;&lt;/elevenlabs-convai&gt;<br>
+                    &lt;script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"&gt;&lt;/script&gt;
+                </code>
             </div>
         </div>
 
-        <div class="info-banner">
-            <p><strong>💡 Nasıl Kullanılır?</strong> Mikrofon simgesine tıklayarak asistanla konuşmaya başlayabilirsiniz. Sesli komutlarınızı dinler ve size anında yanıt verir. Doğal bir şekilde konuşmanız yeterli!</p>
-        </div>
+        <footer>
+            <p>Powered by ElevenLabs AI Technology | 2024</p>
+        </footer>
     </div>
 
+    <!-- ElevenLabs Widget Script -->
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
