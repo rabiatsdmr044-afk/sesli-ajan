@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yapay Zeka Sesli Asistan</title>
+    <title>ElevenLabs Sesli Asistan</title>
     <style>
         * {
             margin: 0;
@@ -13,98 +12,165 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            padding: 50px;
+            max-width: 900px;
             width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
             text-align: center;
+            margin-bottom: 40px;
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 10px;
+            color: #1a1a1a;
             font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
             color: #666;
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+
+        .assistant-container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
             margin-bottom: 30px;
-            font-size: 1.1em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f0f0f0;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .assistant-wrapper {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .info-box h3 {
-            margin-bottom: 10px;
-        }
-
-        .info-box p {
-            line-height: 1.6;
+        elevenlabs-convai {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
         }
 
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-top: 30px;
         }
 
         .feature-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
         }
 
         .feature-icon {
-            font-size: 2em;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
 
         .feature-title {
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .info-banner {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .info-banner p {
+            color: #1565c0;
+            line-height: 1.8;
+            font-size: 1em;
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
             h1 {
                 font-size: 2em;
             }
 
-            .container {
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .assistant-container {
                 padding: 20px;
+                min-height: 400px;
             }
 
             .features {
@@ -115,38 +181,38 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎙️ Yapay Zeka Sesli Asistan</h1>
-        <p class="subtitle">Sesli olarak konuşabileceğiniz akıllı asistanınız</p>
-
-        <div class="assistant-wrapper">
-            <elevenlabs-convai agent-id="agent_3301kdr8xbqae5j953v2fnssb4rd"></elevenlabs-convai>
+        <div class="header">
+            <h1>🎙️ AI Sesli Asistan</h1>
+            <p class="subtitle">ElevenLabs ile Güçlendirilmiş Yapay Zeka</p>
         </div>
-
-        <div class="info-box">
-            <h3>Nasıl Kullanılır?</h3>
-            <p>Yukarıdaki mikrofon butonuna tıklayarak sesli asistanla konuşmaya başlayabilirsiniz. Asistan sizinle gerçek zamanlı olarak sesli iletişim kuracaktır.</p>
+        
+        <div class="assistant-container">
+            <elevenlabs-convai agent-id="agent_6001kdra150cee1stzvw0rx105at"></elevenlabs-convai>
         </div>
 
         <div class="features">
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <div class="feature-title">Akıllı Yanıtlar</div>
-                <p>Yapay zeka destekli akıllı yanıtlar</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🗣️</div>
+                <div class="feature-icon">🎤</div>
                 <div class="feature-title">Doğal Konuşma</div>
-                <p>İnsan gibi doğal sesli iletişim</p>
+                <div class="feature-desc">Gerçek bir insan gibi akıcı konuşma deneyimi</div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
                 <div class="feature-title">Hızlı Yanıt</div>
-                <p>Anlık ve hızlı geri bildirim</p>
+                <div class="feature-desc">Anında işlem ve hızlı geri dönüş</div>
             </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <div class="feature-title">7/24 Erişim</div>
+                <div class="feature-desc">Her zaman, her yerden ulaşılabilir</div>
+            </div>
+        </div>
+
+        <div class="info-banner">
+            <p><strong>💡 Nasıl Kullanılır?</strong> Mikrofon simgesine tıklayarak asistanla konuşmaya başlayabilirsiniz. Sesli komutlarınızı dinler ve size anında yanıt verir. Doğal bir şekilde konuşmanız yeterli!</p>
         </div>
     </div>
 
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
-```
