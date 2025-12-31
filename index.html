@@ -1,151 +1,110 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Türkçe Sesli Yapay Zeka Asistan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesli Asistan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    body {
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #1a0033, #2d004d);
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
 
-    .app {
-        width: 100%;
-        max-width: 520px;
-        background: rgba(0,0,0,0.45);
-        border-radius: 18px;
-        padding: 28px;
-        box-shadow: 0 15px 50px rgba(0,0,0,0.6);
-        text-align: center;
-    }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
 
-    h1 {
-        color: #c77dff;
-        margin-bottom: 10px;
-    }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
 
-    .subtitle {
-        font-size: 14px;
-        opacity: 0.9;
-        margin-bottom: 18px;
-    }
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
 
-    ul {
-        list-style: none;
-        background: rgba(255,255,255,0.05);
-        padding: 15px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-        text-align: left;
-        font-size: 14px;
-    }
+        .info-box p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
 
-    ul li {
-        margin-bottom: 6px;
-    }
+        .assistant-wrapper {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
 
-    .welcome {
-        margin-bottom: 16px;
-        font-size: 15px;
-        color: #e0aaff;
-        line-height: 1.4;
-    }
+        .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
 
-    button {
-        width: 100%;
-        padding: 14px;
-        background: #9d4edd;
-        border: none;
-        border-radius: 12px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+        footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
 
-    button:hover {
-        background: #7b2cbf;
-    }
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
 
-    .widget-box {
-        margin-top: 20px;
-        display: none;
-        animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    footer {
-        margin-top: 18px;
-        font-size: 12px;
-        opacity: 0.7;
-    }
-</style>
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <div class="icon">🎙️</div>
+        <h1>Yapay Zeka Sesli Asistan</h1>
+        <p class="subtitle">ElevenLabs tarafından desteklenmektedir</p>
+        
+        <div class="info-box">
+            <p><strong>Hoş Geldiniz!</strong></p>
+            <p>Sesli asistanımız sizinle konuşmaya hazır. Mikrofon butonuna tıklayarak sohbete başlayabilirsiniz.</p>
+        </div>
 
-<div class="app">
-    <h1>Türkçe Sesli Yapay Zeka</h1>
-    <div class="subtitle">ElevenLabs ConvAI • Gömülü Asistan</div>
+        <div class="assistant-wrapper">
+            <elevenlabs-convai agent-id="agent_0301kdsjjc4vf348613vq83ed0wj"></elevenlabs-convai>
+        </div>
 
-    <ul>
-        <li><strong>Dil:</strong> Türkçe</li>
-        <li><strong>Konuşma:</strong> Sesli & etkileşimli</li>
-        <li><strong>Agent ID:</strong> agent_4701kcnp4gzjehdbz5w1yb7pdzy6</li>
-        <li><strong>Kullanım:</strong> Web / Portföy / Proje</li>
-    </ul>
-
-    <div class="welcome">
-        Merhaba 👋<br>
-        Ben seninle <strong>Türkçe konuşan</strong> sesli yapay zeka asistanınım.  
-        Aşağıdaki butondan beni açabilirsin.
+        <footer>
+            <p>💡 İpucu: Asistan ile doğal bir şekilde konuşabilirsiniz</p>
+        </footer>
     </div>
 
-    <button onclick="toggleAssistant()">Asistanı Aç / Kapat</button>
-
-    <div class="widget-box" id="assistant">
-        <elevenlabs-convai
-            agent-id="agent_4701kcnp4gzjehdbz5w1yb7pdzy6">
-        </elevenlabs-convai>
-    </div>
-
-    <footer>
-        © 2025 • AI Voice Assistant
-    </footer>
-</div>
-
-<script>
-    function toggleAssistant() {
-        const box = document.getElementById("assistant");
-        box.style.display = box.style.display === "none" || box.style.display === ""
-            ? "block"
-            : "none";
-    }
-</script>
-
-<script
-    src="https://unpkg.com/@elevenlabs/convai-widget-embed"
-    async
-    type="text/javascript">
-</script>
-
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
